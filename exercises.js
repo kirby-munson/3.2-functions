@@ -53,32 +53,33 @@ function isVowel(char){
 
 console.assert(isVowel("a")==true);
 
+// 'aeiuo'.indexOf(char); ! === -1 means that there is a vowel // another way to do this//
+
 
 // ---------------------
 // Write a function rovarspraket() that will translate a text into "rövarspråket". That is, double every consonant and place an occurrence of "o" in between. For example, translate("this is fun") should return the string "tothohisos isos fofunon".
 // ---------------------
 
-// function rovarspraket(phrase){
-//     "use strict";
-//
-//      var myPhrase = phrase;
-//      var myArray = new Array();
-//
-//      for (var i=0; i < myPhrase.length; i++){
-//        myArray.push(myPhrase[i]);
-//        if(myPhrase[i] == "a" || myPhrase[i] == "e" || myPhrase[i] == "i" || myPhrase[i] == "o" || myPhrase[i] == "u"){
-//           var same = myPhrase[i];
-//        } else {
-//           var newWord = myPhrase[i] + "o" + myPhrase[i];
-//        }
-//        console.log(newWord);
-//      }
-//    }
-//
-//    function myTranslation
-// rovarspraket("hello");
- // console.assert(rovarspraket('hello')=='hohelollolo')
 
+function rovarspraket(phrase){
+    "use strict";
+
+    var translation;
+
+ for (var i=0; i<phrase.lenth; i++){
+   var char = phrase[i];
+   if(isVowel(char || === '')){
+     translation += char;
+   }else {
+     translation += char + 'o' + char;
+   }
+ }
+
+    return translation;
+  }
+
+
+ console.assert(rovarspraket('this is fun')=='tothohisos isos fofunon')
 
 // ---------------------
 // Define a function sum() and a function multiply() that sums and multiplies (respectively) all the numbers in an array of numbers. For example, sum([1,2,3,4]) should return 10, and multiply([1,2,3,4]) should return 24.
@@ -95,6 +96,7 @@ console.assert(isVowel("a")==true);
 //   for (var i = 0; i < myNumbers.length; i++) {
 //       num = num + myNumbers[i];
 //     }
+//     console.log(sum(1,2,3,4));
 //   }
 //
 //
@@ -104,10 +106,33 @@ console.assert(isVowel("a")==true);
 //       for (var i = 0; i < myNumbers.length; i++) {
 //           num2 = num2 * myNumbers[i];
 //         }
+//         console.log(multiply(1,2,3,4));
 //       }
-//
-// console.assert(sum([1,2,3,4])==10);
-// console.assert(multiply([1,2,3,4])==24);
+
+
+function sum(numbersToAdd){
+  var total = 0;
+
+  for(var i=0; i<numbersToAdd.length; i++){
+    total += numbersToAdd[i];
+  }
+  return total;
+}
+
+console.assert(sum(1,2,3,4)==10)
+
+
+function multiply(numbersToMulitply){
+  var product = numbersToMulitply[0];
+
+  for(var i=1; i<numbersToMulitply.length; i++){
+    product = product * numbersToMulitply[i];
+  }
+  return product;
+}
+
+console.assert(multiply(1,2,3,4)==24)
+
 
 // // ---------------------
 // // Define a function reverse() that computes the reversal of a string. For example, reverse("jag testar") should return the string "ratset gaj".
@@ -126,34 +151,63 @@ console.assert(reverse('kirby')== 'ybrik');
 // Write a function findLongestWord() that takes an array of words and returns the length of the longest one.
 // ---------------------
 
-// var myArray = [];
-// var words = myArray;
-//
-// function findLongestWord(words){
-//     "use strict";
-//
-//     for (var i = 0; i < words.length; i++) {
-//           console.log(words[i].length);
-//           }
-//
-// }
-// findLongestWord(['hello', 'hey', 'hi']);
-//
+function findLongestWord(words){
+  var longestLength = 0;
 
-// ---------------------
-// Write a function filterLongWords() that takes an array of words and an integer i and returns the array of words that are longer than i.
-// ---------------------
+  for (var i=0; i<words.length; i++){
+    var word = words[i];
 
-function filterLongWords(words, i){
-    "use strict";
-    //...
+    if (word.length > longestLength){
+      longestLength = word.length;
+    }
+  }
+
 }
 
-// ---------------------
-// Write a function charFreq() that takes a string and builds a frequency listing of the characters contained in it. Represent the frequency listing as a Javascript object. Try it with something like charFreq("abbabcbdbabdbdbabababcbcbab").
-// ---------------------
+console.assert(findLongestWord('it', 'this', 'a')==4);
 
+// //
+//
+// // ---------------------
+// // Write a function filterLongWords() that takes an array of words and an integer i and returns the array of words that are longer than i.
+// // ---------------------
+//
+
+function filterLongWords(words, size){
+    "use strict";
+    var newWordList = [];
+
+    for (var i=0; i<words.length; i++){
+      var word = words[i];
+      if(word.length < size){
+        newWordList.push(word);
+      }
+    }
+    return newWordList;
+}
+
+
+console.log(filterLongWords(['it', 'the', 'long'], 4);
+
+// // ---------------------
+// // Write a function charFreq() that takes a string and builds a frequency listing of the characters contained in it. Represent the frequency listing as a Javascript object. Try it with something like charFreq("abbabcbdbabdbdbabababcbcbab").
+// // ---------------------
+//
 function charFreq(string){
-    "use strict";
-    //...
+  var frequency = {};
+
+
+for (var i=0; i<string.length; i++){
+  var char = string[i];
+  if(frequency.hasOwnProperty(char)){
+    frequency[char] += 1;
+  }else{
+    frequency[char] = 1;
+  }
 }
+
+  return frequency;
+
+}
+
+console.log(charFreq("abbabcbdbabdbdbabababcbcbab"));
